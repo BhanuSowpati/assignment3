@@ -1,0 +1,82 @@
+<html>
+<head>
+<script type="text/javascript">
+	function customerorder()
+	{
+			var que1=document.getElementById("q1").value;
+			var que2=document.getElementById("q2").value;
+			var que3=document.getElementById("q3").value;
+			var que4=document.getElementById("q4").value;
+			var customername=document.getElementById("name").value;
+			var gender=document.getElementById("gender").value;
+			var customeraddress=document.getElementById("address").value;
+			var customerphno=document.getElementById("phno").value;
+			var payment=document.getElementById("paymenttype").value;
+			var object=new XMLHttpRequest();
+			var querystring="cart.php?name="+customername+"&gender="+gender+"&address="+customeraddress+"&phno="+customerphno+"&paymenttype="+payment+"&q1="+que1+"&q2="+que2+"&q3="+que3+"&q4="+que4;
+			object.onreadystatechange=function()
+			{
+					if(object.readyState==4&&object.status==200)
+					{
+							document.getElementById("resdiv").innerHTML=object.responseText;
+					}
+			};
+			object.open("GET",querystring,true);
+			object.send();
+		}
+</script>
+</head>
+<body>
+<form>
+<style>
+table, th, td
+ {
+	border: 1px solid black;
+
+	border-collapse: collapse;
+}
+</style>
+
+<table id="mytable">
+	<tr>
+		<th>PRODUCT</th>
+		<th>UNITPRICE</th>
+		<th>QUANTITY</th>
+	</tr>
+	<tr>
+		<td>USB pendrive</td>
+		<td>500</td>
+		<td><input type="text" id="q1"/></td>
+	</tr>
+	<tr>
+		<td>Wireless Mouse</td>
+		<td>1200</td>
+		<td><input type="text" id="q2"/></td>
+	</tr>
+	<tr>
+		<td>Keyboard</td>
+		<td>900</td>
+		<td><input type="text" id="q3"/></td>
+	</tr>
+	<tr>
+		<td>Laptop</td>
+		<td>35000</td>
+		<td><input type="text" id="q4"/></td>
+	</tr>
+</table>
+NAME:<input type="text" id="name"/><br>
+<input type="radio" id="gender" value="male"/>MALE<br>
+<input type="radio" id="gender" value="female"/>FEMALE<br>
+ADDRESS:<textarea rows="10" col="10" id="address"></textarea><br>
+PHONENUMBER:<input type="text" id="phno"/><br>
+<input type="radio" id="paymenttype" value="cashondelivery"/>CASH ON DELIVERY<br>
+<input type="radio" id="paymenttype" value="internetbanking"/>INTERNET BANKING<br>
+<input type="radio" id="paymenttype" value="credit/debit"/>CREDIT/DEBIT<br>
+<input type="button" value="submit" onclick="customerorder()"/>
+
+
+</form>
+<div id="resdiv"><h1>SEE UR RESULTS</h1>
+</div>
+</body>
+</html>
